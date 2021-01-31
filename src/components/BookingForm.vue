@@ -37,7 +37,7 @@
           </div>
 
           <div class="btn-wrapper">
-            <button class="btn" @click.prevent="fillForm">Заполнить форму</button>
+            <button class="btn btn-light" @click.prevent="fillForm">Заполнить форму</button>
             <button class="btn" type="submit" :disabled="!fieldsIsValid">Забронировать</button>
           </div>
         </form>

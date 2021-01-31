@@ -13,18 +13,20 @@
       </div>
     </div>
 
-    <loading />
+    <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
 
 <script lang="ts">
 import Loading from '@/components/Loading.vue'
 import HotelModel from '@/models/HotelModel'
+import InfiniteLoading from 'vue-infinite-loading';
 import { Component, Vue } from 'vue-property-decorator';
 
 @Component({
   components: {
-    Loading
+    Loading,
+    InfiniteLoading
   }
 })
 export default class Main extends Vue {
@@ -40,8 +42,27 @@ export default class Main extends Vue {
     this.$router.push({ name: 'hotel', params: { id: id } });
   }
 
-  hitBottom(): void {
+  infiniteHandler($state: any): void {
     console.log('hit the bottom');
+    console.log('start fetchHotels');
+
+    this.$store.dispatch('fetchHotels')
+      .then((response) => {
+        if (response === 'enough') {
+          $state.complete();
+
+          console.log('end fetchHotels and enough');
+        } else {
+          $state.loaded();
+
+          console.log('end fetchHotels');
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+
+        $state.complete();
+      })
   }
 }
 </script>

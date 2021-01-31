@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div id="header">
-      <div id="logo">
+      <div id="logo" @click="gotoMain">
         bookMe<span>Now</span>
       </div>
     </div>
@@ -55,6 +55,10 @@ export default class App extends Vue {
           this.$store.dispatch('loadingStopped');
         }, 600);
       })
+  }
+
+  gotoMain() {
+    this.$router.push({ name: 'main' })
   }
 }
 </script>
@@ -289,6 +293,12 @@ img {
   text-transform: uppercase;
   border: none;
   border-radius: 4px;
+
+  &.btn-light {
+    background: transparent;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
 }
 
 .btn-wrapper {
