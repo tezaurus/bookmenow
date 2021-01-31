@@ -5,7 +5,7 @@ export default {
         hotels: Array<Hotel>(),
         currentHotel: Hotel,
         start: 0,
-        limit: 10,
+        limit: 20,
     },
 
     actions: {

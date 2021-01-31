@@ -5,17 +5,23 @@
         bookMeNow
       </div>
 
-      <div id="nav">
-        <router-link to="/">Home</router-link>
-        <router-link to="/about">About</router-link>
-      </div>
+      <!-- <div id="nav">
+        <router-link to="/">Отели</router-link>
+        <router-link to="/about">О программе</router-link>
+      </div> -->
     </div>
 
     <loading v-if="inProgress" />
 
     <router-view v-show="!inProgress" />
 
-    <div id="footer"></div>
+    <div id="footer">
+      <div class="tabs">
+        <div class="tab"><router-link to="/">Отели</router-link></div>
+        <div class="tab">Заглушка</div>
+        <div class="tab"><router-link to="/about">Что нового</router-link></div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -61,9 +67,45 @@ export default class App extends Vue {
 
 
 <style lang="scss">
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap');
+
 * {
   margin: 0;
   padding: 0;
+}
+
+h1, h2, h3 {
+  margin-top: 0;
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: 22px;
+}
+
+h2 {
+  font-size: 18px;
+}
+
+h3 {
+  font-size: 16px;
+}
+
+p, li {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+ul, ol {
+  li {
+    margin-bottom: 8px;
+  }
+
+  *:last-child {
+    margin-bottom: 0;
+  }
 }
 
 img {
@@ -71,7 +113,7 @@ img {
 }
 
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
@@ -94,7 +136,8 @@ img {
 }
 
 #logo {
-  font-weight: bold;
+  font-weight: 600;
+  font-size: 22px;
 }
 
 #nav {
@@ -109,10 +152,39 @@ img {
 }
 
 #footer {
-  background-color: #fff;
+  background-color: #ddd;
   width: 640px;
   height: 56px;
   position: fixed;
   bottom: 0;
+}
+
+.tabs {
+  height: 56px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .tab {
+    flex-basis: 33.33%;
+    text-align: center;
+  }
+}
+
+.text-wrapper {
+  padding-top: 16px;
+
+  p + h2 {
+    margin-top: 32px;
+  }
+
+  ul {
+    padding-left: 32px;
+    list-style: circle;
+  }
+
+  *:last-child {
+    margin-bottom: 0;
+  }
 }
 </style>
