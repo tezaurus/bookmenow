@@ -1,13 +1,13 @@
-export default class Hotel {
+export default class HotelModel {
     id: number;
     photo: string;
     title: string;
-    addr: string;
+    description: string;
 
     constructor() {
         this.id = 0;
         this.title = '';
         this.photo = '';
-        this.addr = '';
+        this.description = '';
     }
 }

@@ -1,14 +1,15 @@
 <template>
-    <div>
-        <div class="lds-ripple-wrapper">
-            <div class="lds-ripple"><div></div><div></div></div>
-        </div>
+  <div>
+    <div class="lds-ripple-wrapper">
+      <div class="lds-ripple"><div></div><div></div></div>
     </div>
+  </div>
 </template>
 
 <style scoped>
 .lds-ripple-wrapper {
-    text-align: center;
+  text-align: center;
+  padding-top: 16px;
 }
 .lds-ripple {
   display: inline-block;

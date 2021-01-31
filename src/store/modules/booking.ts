@@ -1,4 +1,4 @@
-import Booking from '@/models/Booking'
+import Booking from '@/models/BookingModel'
 
 export default {
     state: {

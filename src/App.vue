@@ -4,16 +4,11 @@
       <div id="logo">
         bookMeNow
       </div>
-
-      <!-- <div id="nav">
-        <router-link to="/">Отели</router-link>
-        <router-link to="/about">О программе</router-link>
-      </div> -->
     </div>
 
-    <loading v-if="inProgress" />
+    <loading v-if="isLoading" />
 
-    <router-view v-show="!inProgress" />
+    <router-view v-show="!isLoading" />
 
     <div id="footer">
       <div class="tabs">
@@ -35,36 +30,34 @@ import { Component, Vue } from 'vue-property-decorator';
   },
 })
 export default class App extends Vue {
-  private inProgress: boolean;
-
-  constructor() {
-    super();
-
-    this.inProgress = true;
-
+  created() {
     this.fetchHotels();
   }
 
+  get isLoading(): boolean {
+    return this.$store.getters.isLoading;
+  }
+
   fetchHotels(): void {
-    this.inProgress = true;
-    console.log('init fetching')
+    this.$store.dispatch('loadingStarted');
+
+    console.log('start fetchHotels')
 
     this.$store.dispatch('fetchHotels')
       .then(() => {
-        // Emulate delay
-        setTimeout(() => {
-          this.inProgress = false;
-        }, 600);
-
-        console.log('fetching complete');
+        console.log('end fetchHotels')
       })
       .catch(error => {
         console.log(error);
-      });
+      })
+      .finally(() => {
+        setTimeout(() => {
+          this.$store.dispatch('loadingStopped');
+        }, 600);
+      })
   }
 }
 </script>
-
 
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap');
@@ -121,6 +114,7 @@ img {
   margin: 0 auto;
   padding-top: 56px;
   padding-bottom: 56px;
+  overflow: hidden;
 }
 
 #header {
@@ -133,11 +127,13 @@ img {
   justify-content: space-between;
   border-bottom: solid #ddd 1px;
   background-color: #fff;
+  box-shadow: 0 4px 6px -6px rgba($color: #000, $alpha: 0.2);
 }
 
 #logo {
   font-weight: 600;
   font-size: 22px;
+  margin-left: 8px;
 }
 
 #nav {
@@ -152,11 +148,12 @@ img {
 }
 
 #footer {
-  background-color: #ddd;
   width: 640px;
   height: 56px;
   position: fixed;
   bottom: 0;
+  background-color: #fff;
+  box-shadow: 0 -4px 16px -4px rgba($color: #000, $alpha: 0.1);
 }
 
 .tabs {
@@ -171,9 +168,11 @@ img {
   }
 }
 
-.text-wrapper {
-  padding-top: 16px;
+.page-wrapper {
+  padding: 16px 16px 0;
+}
 
+.text-wrapper {
   p + h2 {
     margin-top: 32px;
   }
@@ -186,5 +185,70 @@ img {
   *:last-child {
     margin-bottom: 0;
   }
+}
+
+.card {
+  border: solid #ddd 1px;
+  border-radius: 16px;
+  margin-bottom: 16px;
+  padding: 16px;
+}
+
+.card-header {
+  font-size: 18px;
+  font-weight: bold;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  border-bottom: solid #ddd 1px;
+}
+
+.card-body *:last-child {
+  margin-bottom: 0;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  font-size: 12px;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.form-control {
+  box-sizing: border-box;
+  border: solid #ddd 1px;
+  padding: 6px;
+  display: block;
+  width: 100%;
+}
+
+.form-control-text {
+  font-size: 10px;
+  color: #939393;
+  margin-top: 4px;
+}
+
+.form-control-text-error {
+  color: red;
+}
+
+.btn {
+  box-sizing: border-box;
+  padding: 12px 16px;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 4px;
+}
+
+.btn-wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-wrapper .btn {
+  margin-left: 16px;
 }
 </style>

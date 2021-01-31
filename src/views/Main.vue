@@ -1,14 +1,14 @@
 <template>
   <div>
     <div class="list-group">
-      <div class="list-group-item" v-for="hotel in hotels" :key="hotel.id">
+      <div class="list-group-item" v-for="hotel in hotels" :key="hotel.id" @click="gotoHotel(hotel.id)">
         <div class="img-wrapper">
           <img :src="hotel.photo" alt="Hotel photo">
         </div>
 
         <div class="info-wrapper">
           <p class="">{{ hotel.title }}</p>
-          <p class="subtitle">{{ hotel.addr }}</p>
+          <p class="subtitle">{{ hotel.description }}</p>
         </div>
       </div>
     </div>
@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import Hotel from '@/models/Hotel'
+import HotelModel from '@/models/Hotel'
 import { Component, Vue } from 'vue-property-decorator';
 
 @Component
@@ -25,8 +25,12 @@ export default class Main extends Vue {
     super();
   }
 
-  get hotels(): Array<Hotel> {
+  get hotels(): Array<HotelModel> {
     return this.$store.getters.hotels;
+  }
+
+  gotoHotel(id: string): void {
+    this.$router.push({ name: 'hotel', params: { id: id } });
   }
 }
 </script>
@@ -57,6 +61,7 @@ export default class Main extends Vue {
 
       p {
         margin: 0;
+        font-size: 16px;
         @include text-overflow;
 
         &.title {
@@ -65,6 +70,7 @@ export default class Main extends Vue {
 
         &.subtitle {
           color: #939393;
+          font-size: 14px;
         }
       }
     }

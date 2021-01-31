@@ -1,9 +1,9 @@
-import Hotel from '@/models/Hotel'
+import HotelModel from '@/models/HotelModel'
 
 export default {
     state: {
-        hotels: Array<Hotel>(),
-        currentHotel: Hotel,
+        hotels: Array<HotelModel>(),
+        hotel: HotelModel,
         start: 0,
         limit: 20,
     },
@@ -23,7 +23,7 @@ export default {
                     id: post.id,
                     photo: `/hotels/photos/hotel-80x60-00${randomNumber}.jpg`,
                     title: post.title,
-                    addr: post.body,
+                    description: post.body,
                 }
             });
 
@@ -33,18 +33,20 @@ export default {
             commit('incrementStart');
         },
 
-        // async getCurrentHotel({ commit, getters, dispatch }, id) {
-        //     // Запрос на backend, если данных в hotels мало
-        //     // const response = await fetch('.../id');
-        //     // commit('setCurrentHotel', await response.json());
+        async fetchHotel({ commit, getters }, id: string) {
+            const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
+            const postJsonData = await response.json();
 
-        //     if (getters.hotels.length === 0)
-        //         await dispatch('fetchHotels');
+            // Convert to Hotel type
+            const hotelJsonData = {
+                id: postJsonData.id,
+                photo: `/hotels/photos/hotel-640x360-001.jpg`,
+                title: postJsonData.title,
+                description: postJsonData.body,
+            }
 
-        //     const hotel: Hotel = getters.hotels.find(hotel => hotel.id === id);
-
-        //     commit('setCurrentHotel', hotel);
-        // }
+            commit('loadHotel', hotelJsonData);
+        },
     },
 
     mutations: {
@@ -52,13 +54,17 @@ export default {
             state.start += 10;
         },
 
-        loadHotels(state: any, hotels: Array<Hotel>) {
+        loadHotels(state: any, hotels: Array<HotelModel>) {
             state.hotels = hotels;
         },
 
-        setCurrentHotel(state: any, hotel: Hotel) {
-            state.currentHotel = hotel;
-        }
+        loadHotel(state: any, hotel: HotelModel) {
+            state.hotel = hotel;
+        },
+
+        // setCurrentHotel(state: any, hotel: HotelModel) {
+        //     state.currentHotel = hotel;
+        // }
     },
 
     getters: {
@@ -74,8 +80,8 @@ export default {
             return state.hotels;
         },
 
-        currentHotel(state: any) {
-            return state.currentHotel;
+        hotel(state: any) {
+            return state.hotel;
         }
     }
 }
