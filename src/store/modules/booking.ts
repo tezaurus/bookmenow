@@ -6,7 +6,7 @@ export default {
   },
 
   actions: {
-    async sendBooking({ commit }: { commit: Function }, booking: Booking) {
+    async sendBooking({ commit }: { commit: Function }, booking: Booking): Promise<any> {
       // ~ POST запрос на сервер
       // нужно будет переработать метод submitBooking в BookingForm
       // fetch('...', { method: 'POST', body: JSON.stringify(bookingData)})
@@ -27,13 +27,13 @@ export default {
   },
 
   mutations: {
-    storeBooking(state: any, booking: Booking) {
+    storeBooking(state: any, booking: Booking): void {
       state.bookings.push(booking);
     },
   },
 
   getters: {
-    bookings(state: any) {
+    bookings(state: any): Array<Booking> {
       return state.bookings;
     },
   }

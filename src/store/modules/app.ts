@@ -14,17 +14,17 @@ export default {
   },
 
   mutations: {
-    startLoading(state: any) {
+    startLoading(state: any): void {
       state.isLoading = true;
     },
 
-    stopLoading(state: any) {
+    stopLoading(state: any): void {
       state.isLoading = false;
     },
   },
 
   getters: {
-    isLoading(state: any) {
+    isLoading(state: any): boolean {
       return state.isLoading;
     },
   }
