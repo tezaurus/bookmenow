@@ -12,9 +12,9 @@
 
     <div id="footer">
       <div class="tabs">
-        <div class="tab"><router-link to="/">Отели</router-link></div>
-        <div class="tab"><router-link to="/bookings">Текущие заявки</router-link></div>
-        <div class="tab"><router-link to="/about">О программе</router-link></div>
+        <div class="tab"><router-link to="/"><tab-icon-hotels :width="25" :height="25" /></router-link></div>
+        <div class="tab"><router-link to="/bookings"><tab-icon-bookings :width="24" :height="24" /></router-link></div>
+        <div class="tab"><router-link to="/about"><tab-icon-about :width="20" :height="20" /></router-link></div>
       </div>
     </div>
   </div>
@@ -22,11 +22,17 @@
 
 <script lang="ts">
 import Loading from '@/components/Loading.vue'
+import TabIconHotels from '@/components/icons/TabIconHotels.vue'
+import TabIconBookings from '@/components/icons/TabIconBookings.vue'
+import TabIconAbout from '@/components/icons/TabIconAbout.vue'
 import { Component, Vue } from 'vue-property-decorator';
 
 @Component({
   components: {
     Loading,
+    TabIconHotels,
+    TabIconBookings,
+    TabIconAbout,
   },
 })
 export default class App extends Vue {
