@@ -6,7 +6,7 @@ export default {
   },
 
   actions: {
-    async sendBooking({ commit }, booking: Booking) {
+    async sendBooking({ commit }: { commit: Function }, booking: Booking) {
       // ~ POST запрос на сервер
       // нужно будет переработать метод submitBooking в BookingForm
       // fetch('...', { method: 'POST', body: JSON.stringify(bookingData)})

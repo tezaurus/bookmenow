@@ -9,7 +9,7 @@ export default {
   },
 
   actions: {
-    async fetchHotels({ commit, getters }) {
+    async fetchHotels({ commit, getters }: { commit: Function, getters: any }) {
       if (getters.start > 50)
         return Promise.reject('enough');
 
@@ -33,7 +33,7 @@ export default {
       commit('incrementStart');
     },
 
-    async fetchHotel({ commit, getters }, id: string) {
+    async fetchHotel({ commit, getters }: { commit: Function, getters: any }, id: string) {
       const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
       const postJsonData = await response.json();
 

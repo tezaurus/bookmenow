@@ -4,11 +4,11 @@ export default {
   },
 
   actions: {
-    loadingStarted({ commit }) {
+    loadingStarted({ commit }: { commit: Function }): void {
       commit('startLoading');
     },
 
-    loadingStopped({ commit }) {
+    loadingStopped({ commit }: { commit: Function }): void {
       commit('stopLoading');
     },
   },
