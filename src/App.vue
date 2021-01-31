@@ -13,7 +13,7 @@
     <div id="footer">
       <div class="tabs">
         <div class="tab"><router-link to="/">Отели</router-link></div>
-        <div class="tab">Заглушка</div>
+        <div class="tab"><router-link to="/bookings">Текущие заявки</router-link></div>
         <div class="tab"><router-link to="/about">Что нового</router-link></div>
       </div>
     </div>
@@ -105,6 +105,11 @@ img {
   vertical-align: bottom;
 }
 
+.img-responsive {
+  max-width: 100%;
+  height: auto;
+}
+
 #app {
   font-family: 'Open Sans', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -169,11 +174,15 @@ img {
 }
 
 .page-wrapper {
-  padding: 16px 16px 0;
+  padding: 16px;
 }
 
 .text-wrapper {
   p + h2 {
+    margin-top: 32px;
+  }
+  ul + h2,
+  ol + h2 {
     margin-top: 32px;
   }
 
@@ -192,29 +201,34 @@ img {
   border-radius: 16px;
   margin-bottom: 16px;
   padding: 16px;
+
+  .card-header {
+    font-size: 18px;
+    font-weight: bold;
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+    border-bottom: solid #ddd 1px;
+  }
+
+  .card-body *:last-child {
+    margin-bottom: 0;
+  }
 }
 
-.card-header {
-  font-size: 18px;
-  font-weight: bold;
-  padding-bottom: 16px;
-  margin-bottom: 16px;
-  border-bottom: solid #ddd 1px;
-}
-
-.card-body *:last-child {
-  margin-bottom: 0;
+.card-transparent {
+  padding: 0;
+  border: none;
 }
 
 .form-group {
   margin-bottom: 16px;
-}
 
-.form-group label {
-  font-size: 12px;
-  font-weight: bold;
-  display: block;
-  margin-bottom: 6px;
+  label {
+    font-size: 12px;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 6px;
+  }
 }
 
 .form-control {

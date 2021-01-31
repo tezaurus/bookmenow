@@ -1,27 +1,33 @@
 <template>
   <div>
-    <loading v-if="isLoading" />
+    <loading v-show="isLoading" />
 
-    <div class="page-wrapper" v-else>
+    <div class="page-wrapper" v-show="!isLoading">
       <div v-if="hotel">
         <h1>{{ hotel.title }}</h1>
 
         <p>{{ hotel.description }}</p>
 
-        <p><img :src="hotel.photo" alt="Hotel photo"></p>
+        <p>
+          <img class="img-responsive" :src="hotel.photo" alt="Hotel photo">
+        </p>
       </div>
+
+      <booking-form />
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import Loading from '@/components/Loading.vue'
+import BookingForm from '@/components/BookingForm.vue'
 import HotelModel from '@/models/HotelModel'
 import { Component, Vue } from 'vue-property-decorator';
 
 @Component({
   components: {
-    Loading
+    Loading,
+    BookingForm
   }
 })
 export default class Hotel extends Vue {
