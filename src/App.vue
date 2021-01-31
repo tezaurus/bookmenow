@@ -2,7 +2,7 @@
   <div id="app">
     <div id="header">
       <div id="logo">
-        bookMeNow
+        bookMe<span>Now</span>
       </div>
     </div>
 
@@ -14,7 +14,7 @@
       <div class="tabs">
         <div class="tab"><router-link to="/">Отели</router-link></div>
         <div class="tab"><router-link to="/bookings">Текущие заявки</router-link></div>
-        <div class="tab"><router-link to="/about">Что нового</router-link></div>
+        <div class="tab"><router-link to="/about">О программе</router-link></div>
       </div>
     </div>
   </div>
@@ -62,9 +62,13 @@ export default class App extends Vue {
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap');
 
+$breakpoint-tablet: 768px;
+$red: #de4d4d;
+
 * {
   margin: 0;
   padding: 0;
+  color: #333;
 }
 
 h1, h2, h3 {
@@ -92,6 +96,8 @@ p, li {
 }
 
 ul, ol {
+  margin-bottom: 16px;
+
   li {
     margin-bottom: 8px;
   }
@@ -139,6 +145,10 @@ img {
   font-weight: 600;
   font-size: 22px;
   margin-left: 8px;
+
+  span {
+    color: $red;
+  }
 }
 
 #nav {
@@ -170,17 +180,41 @@ img {
   .tab {
     flex-basis: 33.33%;
     text-align: center;
+
+    a {
+      font-weight: 600;
+      text-decoration: none;
+    }
   }
+}
+
+.text-accent {
+  background-color: $red;
+  color: #fff;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 2px 6px 3px;
 }
 
 .page-wrapper {
   padding: 16px;
+
+  h1 {
+    border-bottom: solid #333 1px;
+    padding-bottom: 16px;
+  }
 }
 
 .text-wrapper {
+  h1 + h2 {
+    margin-top: 32px;
+  }
+
   p + h2 {
     margin-top: 32px;
   }
+
   ul + h2,
   ol + h2 {
     margin-top: 32px;
@@ -246,7 +280,7 @@ img {
 }
 
 .form-control-text-error {
-  color: red;
+  color: $red;
 }
 
 .btn {
@@ -264,5 +298,31 @@ img {
 
 .btn-wrapper .btn {
   margin-left: 16px;
+}
+
+.text-muted {
+  color: #939393;
+}
+
+@media (max-width: $breakpoint-tablet) {
+  #app {
+    width: 100%;
+  }
+
+  #header {
+    width: 100%;
+  }
+
+  #footer {
+    width: 100%;
+  }
+
+  .tabs {
+    .tab {
+      a {
+        font-size: 14px;
+      }
+    }
+  }
 }
 </style>

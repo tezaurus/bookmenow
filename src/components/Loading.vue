@@ -9,7 +9,7 @@
 <style scoped>
 .lds-ripple-wrapper {
   text-align: center;
-  padding-top: 16px;
+  padding: 16px 0;
 }
 .lds-ripple {
   display: inline-block;

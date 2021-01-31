@@ -12,14 +12,21 @@
         </div>
       </div>
     </div>
+
+    <loading />
   </div>
 </template>
 
 <script lang="ts">
-import HotelModel from '@/models/Hotel'
+import Loading from '@/components/Loading.vue'
+import HotelModel from '@/models/HotelModel'
 import { Component, Vue } from 'vue-property-decorator';
 
-@Component
+@Component({
+  components: {
+    Loading
+  }
+})
 export default class Main extends Vue {
   constructor() {
     super();
@@ -31,6 +38,10 @@ export default class Main extends Vue {
 
   gotoHotel(id: string): void {
     this.$router.push({ name: 'hotel', params: { id: id } });
+  }
+
+  hitBottom(): void {
+    console.log('hit the bottom');
   }
 }
 </script>
